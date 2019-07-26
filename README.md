@@ -5,11 +5,11 @@ Resources for instructors using Introduction to Statistics: A Modeling Approach
 
 There are three categories of resources: Syllabi, Class Materials, and Assessments. 
 
-Class materials range from worksheets to powerpoint slides. 
+Class materials range from worksheets, pdf slides, to powerpoint slides. 
 
 Assessments range from paper and pencil tests to qualtrics files. If you do use the assessments here as a resource, we recommend that you use different data sets or contexts because these are publicly available (that is, students can also find the assessments that are posted here).
 
-All resources are "cumulative" in that if something is labeled "ch5" that worksheet, slidedeck, or assessment may include material from chapters 1 to 5. It is assumed that students will have completed up through chapter 5 before this resource. 
+All resources are "cumulative" in that if something is labeled "ch5" that worksheet, slide deck, or assessment may include material from chapters 1 to 5. It is assumed that students will have completed up through chapter 5 before this resource. 
 
 ## Where are these resources from?
 Several instructors contribute to these sample resources. A little information about who they are and the contexts in which they developed these are provided here. Their last names will be part of the file names. 
