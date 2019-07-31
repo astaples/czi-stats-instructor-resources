@@ -22,3 +22,6 @@ Jim Stigler is one of the authors of the online textbook and an instructor in UC
 
 ### Montoya
 Amanda Montoya is an expert in statistics and an instructor in UCLA's Psychology Department. Her course is an inferential statistics course, each section is ~200+ students (Psychology majors), 10 week (quarter), lecture, meets twice a week.
+
+### Chen
+Miles Chen is an expert in statistics and has been an instructor both at UCLA and UCLA Extension. His course is an introductory statistics course, each section is 10-40 students (different majors), 10 week (quarter), lecture, meets once a week.
