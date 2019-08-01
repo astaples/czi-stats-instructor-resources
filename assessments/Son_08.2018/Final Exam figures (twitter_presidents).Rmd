@@ -1,0 +1,81 @@
+---
+title: "Final Exam (twitter_presidents)"
+output: html_notebook
+---
+
+```{r}
+#loading stats tools
+library(ggformula)
+library(mosaic)
+library(Lock5Data)
+library(Lock5withR)
+library(supernova)
+library(lsr)
+library(fivethirtyeight)
+```
+
+```{r}
+head(twitter_presidents)
+```
+
+```{r}
+gf_jitter(replies ~ user, data = twitter_presidents)
+```
+
+```{r}
+gf_point(replies ~ log(favorites), data = twitter_presidents, color =~user, alpha = .04) %>%
+  gf_facet_grid(user ~ .) %>%
+  gf_lm()
+```
+
+```{r}
+head(arrange(twitter_presidents, favorites))
+```
+```{r}
+user.m <- lm(replies ~ user, data = twitter_presidents)
+twitter_presidents$u.pred <- predict(user.m)
+replies.stats <- favstats(~replies, data = twitter_presidents)
+gf_jitter(replies ~ user, data = twitter_presidents, alpha = .05, size = 3) %>%
+  gf_jitter(u.pred ~ user, height = 0, size = .1, color = "lightpink")%>%
+  gf_theme(theme_classic())%>%
+  gf_hline(yintercept = ~mean, data = replies.stats)
+```
+
+```{r}
+fav.m <- lm(replies ~ favorites, data = twitter_presidents)
+twitter_presidents$fav.pred <- predict(fav.m)
+
+gf_point(replies ~ favorites, data = twitter_presidents, alpha = .05, size = 3) %>%
+  gf_point(fav.pred ~ favorites, height = 0, size = .1, color = "lightpink")%>%
+  gf_theme(theme_classic())%>%
+  gf_lm(color ="lightpink") %>%
+  gf_hline(yintercept = ~mean, data = replies.stats)
+
+user.m
+fav.m
+```
+```{r}
+confint(user.m)
+confint(fav.m)
+```
+
+
+```{r}
+5.6*10^-2
+```
+
+```{r}
+supernova(fav.m)
+```
+
+
+```{r}
+twitter_presidents$morereplies <- twitter_presidents$replies > twitter_presidents$favorites
+
+tally(morereplies ~ user, data = twitter_presidents)
+
+```
+```{r}
+supernova(user.m)
+```
+

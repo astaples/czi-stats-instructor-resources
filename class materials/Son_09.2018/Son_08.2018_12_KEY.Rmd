@@ -1,0 +1,152 @@
+---
+title: "Classwork 6.2"
+output:
+  html_document:
+    df_print: paged
+---
+
+# Downloading and Installing Packages
+You only have to do this once. If you did it last time (and you are using the same computer), you don't need to run it this time.
+
+```{r}
+# install multiple packages at once
+#install.packages(pkgs = c("dplyr", "ggplot2", "ggformula",
+#"mosaic", "supernova", "lsr","Lock5Data", "Lock5withR",
+#"okcupiddata", "dslabs","fivethirtyeight"))
+```
+
+
+# Loading Packages
+You have to run these for every notebook or every session of R. You have the libraries but you need to tell R that you want to use them right now.
+
+```{r}
+library(dplyr)
+library(ggplot2)
+library(ggformula)
+library(mosaic)
+library(supernova)
+library(lsr)
+library(Lock5withR)
+library(okcupiddata)
+library(dslabs)
+library(fivethirtyeight)
+```
+
+# Questions from PollEverywhere
+
+These were questions asked via PollEverywhere. I tried to answer the questions using these examples.
+
+**Question(s):** Will we be tested on vline? And hline? When would we use vline and hline?
+
+**Answer:** For now, you might need vline or hline so that you can see where the mean and/or median might be relative to some visualization. For example, you might want to put the mean as a line on a histogram or a boxplot.
+
+```{r}
+# This bit is just pulling in the PRAISESTUDY data from the internet.
+PRAISESTUDY <- read.csv("http://bit.ly/muellerdweck_study1", header=TRUE)
+```
+
+```{r}
+# It helps to save the favstats so you can use them repeatedly.
+PS3.stats <- favstats(~ PS3, data = PRAISESTUDY)
+PS3.stats
+
+# Here's how to use vline with a histogram.
+gf_histogram(~ PS3, data = PRAISESTUDY, fill="magenta", color = "darkgray", binwidth = 1) %>%
+gf_facet_grid(FEEDBACK ~ .) %>%
+gf_vline(xintercept = ~mean, data = PS3.stats)
+```
+
+```{r}
+# Here is an example of hline.
+gf_boxplot(PS3 ~ FEEDBACK, data = PRAISESTUDY, color = "magenta") %>%
+gf_hline(yintercept = ~mean, data = PS3.stats)
+```
+
+**Question:** making new variables using $ and then using them in functions. Another person asked: For residuals all we have to do is put resid(Empty.model)
+
+**Answer:** I'm going to answer these two questions together and make a new variable (using $) that saves all the residuals. The second person was right -- that is how you get all the residuals from an empty model.
+
+```{r}
+empty.model <- lm(Points ~ NULL, data = MiamiHeat)
+MiamiHeat$residual <- resid(empty.model)
+
+# You can see the new variable (residual) inside MiamiHeat by just printing out MiamiHeat. Remember, the new variable will be at the end.
+head(MiamiHeat)
+```
+
+In general, there was a question about what the $ sign means and how to use it. The $ is to help you say that some variable is "inside" some data frame. So if you tell R to do something with Points, you have to tell R where Points is located. It's inside MiamiHeat. There are two ways to do that. You can use $ by saying MiamiHeat$Points or if you are writing a function, you can use ~ and data = MiamiHeat. Here are some examples that show you both ways.
+
+```{r}
+sum(MiamiHeat$residual)
+sum(~ residual, data = MiamiHeat)
+
+mean(MiamiHeat$residual)
+mean(~ residual, data = MiamiHeat)
+```
+
+**Question:** when and how to use different density codes
+
+**Answer:** The truth is that it's kind of up to you for now. You might need to use density when two groups have different sample sizes. 
+
+```{r}
+gf_histogram(~ Points, data = MiamiHeat, fill = "tomato", color = "black") %>%
+  gf_facet_grid(Win ~ .)
+```
+
+Notice there are more W games than L games. You could use ..density.. so that you can easily see how the two shapes of the distributions compare.
+
+```{r}
+gf_histogram(..density..~ Points, data = MiamiHeat, fill = "tomato", color = "black") %>%
+  gf_facet_grid(Win ~ .)
+```
+
+But you might also sometimes want to use gf_density() to get a sense of the overall shape. This is to help you see the distribution better. There isn't a "right or wrong" time to use gf_density(). It's really whenever you want to look at the data in a slightly different way. It might help generate some ideas about the DGP.
+
+```{r}
+gf_histogram(..density..~ Points, data = MiamiHeat, fill = "tomato", color = "black") %>%
+  gf_facet_grid(Win ~ .) %>%
+  gf_density()
+```
+
+**Question:** How to write shuffle code properly.
+
+**Answer:** This is a long answer. Here we go. Here is a case where it looks like Points is pretty clearly explained by FG. If you knew that a game had a lot of FG, you would be much better off if you guessed they also had a lot of Points.
+
+```{r}
+gf_point(Points ~ FG, data = MiamiHeat, size = 4, color = "tomato")
+```
+
+What if we shuffled one of these variables? Even though this one game has a low number of Points (e.g., 79) and a low number of FG (e.g., 24), we decided to shuffle FG around so that this game gets one of the other FG values randomly. What would the scatterplot look like if we shuffled FG?
+
+```{r}
+# You can create a shuffled version of FG.
+MiamiHeat$FG.shuff <- shuffle(MiamiHeat$FG)
+head(select(MiamiHeat, Points, FG, FG.shuff))
+```
+
+```{r}
+# Then we can put that on a scatterplot with Points.
+gf_point(Points ~ FG.shuff, data = MiamiHeat, size = 4, color = "black")
+```
+
+Notice that when we shuffle FG, we have broken that relationship that helped us explain the variation in Points with FG. Now, if we knew FG.shuff, we wouldn't be able to predict Points very well.
+
+You can also do all this without "saving" the shuffled version of FG. You can shuffle inside of a visualization.
+
+```{r}
+gf_point(Points ~ shuffle(FG), data = MiamiHeat, size = 4, color = "darkgray")
+```
+
+**Question:** Calculating probabilities from the distribution of data? Confused about setting up the code
+
+**Answer:** Let's say you want to know, what is the likelihood that the MiamiHeat will score more than 90 Points on an upcoming game? Maybe you can calculate that probability from the data that we have in MiamiHeat.
+
+```{r}
+tally(~ Points>90, data = MiamiHeat, format = "proportion")
+```
+
+
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
