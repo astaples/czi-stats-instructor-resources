@@ -1,0 +1,213 @@
+---
+title: "Classwork 8 - happydrinks Practice Test"
+output:
+  html_document:
+    df_print: paged
+---
+
+# Loading Packages
+You have to run these for every notebook or every session of R. You have the libraries but you need to tell R that you want to use them right now.
+
+```{r, include = FALSE}
+# the include = FALSE part gets rid of all that junk that gets printed out from loading the libraries
+
+library(dplyr)
+library(ggplot2)
+library(ggformula)
+library(mosaic)
+library(supernova)
+library(lsr)
+library(Lock5withR)
+library(okcupiddata)
+library(dslabs)
+library(fivethirtyeight)
+```
+
+# happydrinks data frame
+
+```{r}
+library(fivethirtyeight)
+drinks$Country <- drinks$country
+happydrinks <- left_join(HappyPlanetIndex, drinks, by = "Country")
+head(happydrinks)
+```
+
+1. Take a look at the variables in the data frame. How might someone use this data to explore whether drinking alcohol explains variation in **Happiness**? Give an example of a pattern that would support their idea. (Note: This pattern does not have to be true in the data, describe the pattern of data you would see if this idea was true.)
+
+Alcohol is associated with greater happiness. If so, then the more alcohol a country drinks, the higher the happiness levels will be.
+
+Alcohol is associated with depression. If so, then the more alcohol a country drinks, the lower the happiness levels will be.
+
+
+2. Which of the variables in the data frame **happydrinks** are quantitative variables?
+
+```{r}
+head(happydrinks)
+```
+
+```{r}
+str(happydrinks)
+```
+
+All the variables are quantitative EXCEPT Country, country, and region.
+
+
+3. Write R code to create a histogram that shows you the variation in **Happiness**.
+
+```{r}
+gf_histogram(~ Happiness, data = happydrinks, fill = "tomato")
+```
+
+
+4. If we asked everyone in our class, “How happy are you today? Rate on a scale of 1 - 10 (10 being very happy),” can we put this data into this data frame as a new row? Why or why not?
+
+Nope, we are not a country.
+
+
+5. What are the cases in this data frame? How many are there?
+
+```{r}
+tail(happydrinks)
+```
+
+```{r}
+favstats(~ Happiness, data = happydrinks)
+```
+
+
+Countries; 143
+
+
+6. Just from looking at the histogram, estimate the standard deviation. Then calculate the standard deviation using R.
+
+Estimate: around 1
+
+From favstats: 1.37
+
+
+7. If you use the distribution of **Happiness** in the **happydrinks** data frame as a probability model, what is the likelihood that a country will have a **Happiness** rating of 3 or lower?
+
+```{r}
+tally(~Happiness <= 3, data = happydrinks, format = "proportion")
+```
+
+Likelihood is .03.
+
+
+8. Write the R code you would use to answer this question: Using the normal distribution to model error, what is the likelihood that a country will have a **Happiness** rating of 3 or lower?
+
+```{r}
+Happi.stats <- favstats(~ Happiness, data = happydrinks)
+
+xpnorm(3, Happi.stats$mean, Happi.stats$sd)
+
+# xpnorm(border, mean, stdev)
+```
+
+
+9. In the figure below, which part represents the probability that a country would have a **Happiness** score of 3 or lower (depicted in red)?
+
+A
+
+
+10. In the figure below, which part represents the z score for a **Happiness** rating of 3?
+
+D
+
+
+11. Find the z-scores for the Happiness ratings of all the countries. What’s Guatemala’s z-score? What does that number mean? What is Bangledesh’s z-score? What does that number mean?
+
+```{r}
+happydrinks$Happi.z <- zscore(happydrinks$Happiness)
+select(happydrinks, Country, Happiness, Happi.z)
+```
+
+Bangladesh's z-score is -.045. Bangladesh's happiness is about half a standard deviation lower than the mean of the planet.
+Guatemala's z-score is 1.07. Guatemala's happiness is 1 standard deviation above the mean of the planet.
+
+
+12. Without looking at the data, write a causal story of the DGP arguing that spirit drinking would make a country more or less happy. Write this causal story of the DGP as a word equation.
+
+Alcohol is a depressant. Drinking it makes people feel more depressed.
+
+Alcohol helps people feel more relaxed and that helps people make more friends and more friends makes people feel happier.
+
+Happiness = Spirits + other stuff
+
+
+13. Without looking at the data, write a non-causal story of the DGP arguing that spirit drinking is only associated with the **Happiness** of a country. Write this non-causal story of the DGP as a word equation.
+
+When people are happy (e.g., want to celebrate), they buy alcohol.
+
+Alcohol is expensive. Rich people can afford. Richer countries are happier.
+
+When people get married, they drink booze. And they are happy because they got married or are celebrating with friends.
+
+Happiness = Spirits + other stuff
+
+
+14. Write R code to create a visualization to see whether variation in spirit drinking helps explain the variation in **Happiness**.
+
+15. It almost seems like there are three types of spirit drinking countries -- those that don’t drink any, those that drink a medium amount of spirits, and those that drink a lot of spirits. Create a new categorical variable (call it **spirit3group**) that splits the countries up into these three groups. Label the groups (“low”, “med”, “high”). Write the R code here.
+
+16. Create at least two different visualizations to see whether spirits3group explains any of the variation in **Happiness** ratings.
+
+17. There are 9 countries that do not have a value for **spirit_servings** (it’s NA). Write R code to put only the countries that have a value for **spirit_servings** into a new data frame called **happyspirits** data frame. From Question 17 and on, we will be using the **happyspirits** data frame.
+
+18. Re-make the visualizations without these NA countries. Do the spirit groups (**spirit3group**) seem to explain some of the variation seen in **Happiness**? How would you write this as a word equation?
+
+19. Based on these visualizations, can we conclude that drinking spirits causes people to be more happy?
+
+20. Use R to find the best fitting estimates for the **spirit3group** model. What does each number mean? Write the R code here.
+
+21. If we are going to try and explain variation in **Happiness** with **spirit3group**, how would you write this model in GLM notation?
+
+22. In the **spirit3group** model, what would each part of the GLM notation represent? Which of the best fitting estimates (from question 20) would be represented by the GLM notation?
+
+23. What would the empty model predict for each country? What would the **spirit3group** model predict for each country?
+
+24. Make a visualization that shows the empty model in blue and the **spirit3group** model in tomato.
+
+25. Make a histogram of **Happiness** by **spirit3group**. Put density plots over the histograms. Where on the density histogram would you look to see evidence of within group variation in **Happiness**?
+
+26. Where on the density histogram would you look to see evidence of between group variation in **Happiness**?
+
+27. In the **spirit3group** model, how is the error from the model calculated? In the empty model, how is the error from the model calculated?
+
+28. Is the **spirit3group** model better at explaining variation than if we had just used an empty model? How much error is there leftover after the empty model? How much error is leftover after the **spirit3group** model? Which one will have more error leftover?
+
+29. Can a complex model (like **spirit3group** model) ever have more error left over than the empty model? Why or why not?
+
+30. What code could you use to get the PRE of the **spirit3group** model?
+
+31. What does the PRE mean?
+
+32. Why is the degrees of freedom for the **spirit3group** model equal to 2?
+
+33. Do these results show that not drinking spirits causes some countries to be less happy?
+
+34. Which of the following is a good reason to consider F instead of PRE to quantify how much variation in **Happiness** was explained by **spirit3group**? 
+
+35. If we created a model called spirit12group, would it do a better job of “explaining variation” than **spirit3group**? Which model would have a larger PRE? Which would have a larger F? (Run code to see.) Why does one model have the larger PRE and the other model have the larger F?
+
+36. Could you write the GLM notation for the **spirit12group** model?
+
+37. Which numbers correspond with sum of squares model, sum of squares error, and sum of squares total? What do each of these numbers mean?
+
+38. Which would be a better explanatory variable for **Happiness**: **beer2group** (splitting the countries up into two equal sized groups based on **beer_servings**) or **spirit3group**? Run analyses in R to make your case.
+
+39. If you get the supernova table for a model explaining variation in **Happiness** with beer2group, you will get the same sum of squares total as you did with the **spirit3group** model. Why?
+
+40. Calculate the variance of **Happiness**. What does this represent?
+
+41. This data frame is terribly labeled. Label **Region** appropriately using R code. The regions are numbered from 1 to 7 and correspond to these labels: 1 - East Asia, 2 - Former Communist Countries, 3 - Latin America, 4 - Middle East and North Africa, 5 - South Asia, 6 - Sub-Saharan Africa, 7 - Western Nations.
+
+42. In our explorations of **Happiness** and spirit groups in **happydrinks** so far, what is the outcome variable and what is the explanatory variable?
+
+43. Why wouldn’t we use tally() in order to explore variation in **Happiness**?
+
+44. If we wanted to make a jitter plot with **Happiness** and spirit groups, by convention, what should go on the y-axis?
+
+45. Let’s say we are very interested in **Happiness** of children in the world. What would be the problem with using this data set to explore this idea?
+
+46. If you created a histogram of **Happiness** but added bins = 10, you would get a different looking histogram than gf_histogram(~ **Happiness**, data = **happyspirits**). Why is that?
