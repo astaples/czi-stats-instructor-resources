@@ -70,20 +70,16 @@ body {
   margin: 0 auto;
 }
 
-body, main {
+main {
   display: flex;
   flex-direction: column;
 }
 
-header {
+header, footer {
   padding: 1em;
 }
 
-section {
-  background-color: #E7F6FD;
-}
-
-section:last-of-type, aside {
+.panel:last-of-type {
   padding-bottom: 1em;
 }
 
@@ -94,7 +90,7 @@ section:last-of-type, aside {
     justify-content: space-between;
   }
 
-  section {
+  .panel {
     width: 33%;
     padding: 1em;
   }
