@@ -70,31 +70,27 @@ body {
   margin: 0 auto;
 }
 
-body, main {
+section#resources {
   display: flex;
   flex-direction: column;
 }
 
-header {
+header, footer {
   padding: 1em;
 }
 
-section {
-  background-color: #E7F6FD;
-}
-
-section:last-of-type, aside {
+.panel:last-of-type {
   padding-bottom: 1em;
 }
 
 @media (min-width: 960px) {
-  main {
+  section#resources {
     flex-direction: row;
     flex: 1;
     justify-content: space-between;
   }
 
-  section {
+  .panel {
     width: 33%;
     padding: 1em;
   }
