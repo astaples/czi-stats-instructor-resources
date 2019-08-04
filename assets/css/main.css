@@ -144,6 +144,7 @@ section:last-of-type, aside {
   padding: 1em;
   border: 1px solid #888;
   width: 80%;
+  max-width: 600px;
   max-height: 80%;
   overflow-y: auto;
 }
