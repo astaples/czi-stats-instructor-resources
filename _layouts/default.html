@@ -1,0 +1,45 @@
+---
+# The dashes above and below this line are required for Jekyll to render the page
+# https://jekyllrb.com/docs/front-matter/
+---
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>CZI Stats | {{ page.title }}</title>
+  <meta name="description" content="{{ page.description | strip_html }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="//fonts.googleapis.com/css?family=Montserrat|Open+Sans&display=swap" rel="stylesheet">
+  <link href="{{ "/assets/css/normalize.css" | relative_url }}"" rel="stylesheet">
+  <link href="{{ "/assets/css/boilerplate.css" | relative_url }}"" rel="stylesheet">
+  <link href="{{ "/assets/css/main.css" | relative_url }}"" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="{{ "/" | relative_url }}">Home</a></li>
+        <li><a href="{{ "syllabi" | relative_url }}">Syllabi</a></li>
+        <li><a href="{{ "class-materials" | relative_url }}">Class Materials</a></li>
+        <li><a href="{{ "assessments" | relative_url }}">Assessments</a></li>
+      </ul>
+    </nav>
+    <h1>{{ page.title }}</h1>
+    <h3>{{ page.description }}</h3>
+  </header>
+
+  {{ content }}
+
+  <footer>
+    <p>
+      This repository is a project of the UCLA Psychology Department’s Teaching and Learning Lab. <br>
+      View the source code on GitHub: <a href="{{ site.github.repository_url }}" target="_blank">{{ site.github.repository_nwo }}</a>
+    </p>
+  </footer>
+</body>
+
+</html>

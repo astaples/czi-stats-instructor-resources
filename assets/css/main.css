@@ -19,6 +19,7 @@
 /*****************************************************************************/
 html, body {
   font-size: 16px;
+  font-family: "Open Sans", sans-serif;
 }
 
 h1, h2, h3, p, a {
@@ -41,23 +42,19 @@ h2 {
   line-height: 28px;
 }
 
-a, p {
+section a, section p {
   color: #515762;
 }
 
 p {
-  font-family: "Open Sans", sans-serif;
   line-height: 1.75rem;
   font-size: 1rem;
   margin-bottom: 1em;
 }
 
-li {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+a {
+  color: #2C3F51;
 }
-
 
 /* Layout */
 /*****************************************************************************/
@@ -70,17 +67,49 @@ body {
   margin: 0 auto;
 }
 
-section#resources {
+body, section#resources {
   display: flex;
   flex-direction: column;
 }
 
-header, footer {
-  padding: 1em;
+section.directory {
+  flex: 1 0 auto;
+}
+
+header {
+  padding: 1em 0;
+}
+
+header {
+  border-bottom: 4px solid #19ACED;
+}
+
+footer {
+  margin-top: 1em;
+  border-top: 4px solid #19ACED;
+}
+
+.panel:first-of-type {
+  border-top: 4px solid #19ACED;
 }
 
 .panel:last-of-type {
   padding-bottom: 1em;
+  border-bottom: 4px solid #19ACED;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-between;
+  padding-inline-start: 0;
+  padding: 0 2rem;
+}
+
+li {
+  white-space: nowrap;
+  padding: .1em 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @media (min-width: 960px) {
@@ -93,76 +122,67 @@ header, footer {
   .panel {
     width: 33%;
     padding: 1em;
+    border-bottom: 4px solid #19ACED;
+    border-top: 4px solid #19ACED;
   }
 
   .bg-full-width {
     position: relative;
-    z-index: 0;
-    margin: 0 -600rem;
-    padding: 0.25rem 600rem;
+    margin: 0 auto;
+    width: 100%;
   }
 
-  .bg-full-width:before {
+  .bg-full-width:after {
     content: "";
     position: absolute;
+    background: inherit;
+    width: 100vw;
+    height: 100%;
     z-index: -1;
     top: 0;
-    bottom: 0;
-    left: 598.5rem;
-    right: 598.5rem;
+    right: calc(51% - 51vw);
   }
 }
 
-/* Modals */
+/* Folder Lists */
 /*****************************************************************************/
-.modal-container {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  padding-top: 2em;
-  left: 0;
-  top: 0;
+
+.directory h2 {
+  font-size: 1.2rem;
+}
+
+.collapsible {
+  border-top: 2px solid;
+  margin: 0 2rem;
+}
+
+.file-list {
+  margin: 0 0 1em 0;
+}
+
+h2 button {
+  all: inherit;
+  border: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
   width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
+  padding: 1em 0;
 }
 
-.modal-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-
-  background-color: #fefefe;
-  margin: auto;
-  padding: 1em;
-  border: 1px solid #888;
-  width: 80%;
-  max-width: 600px;
-  max-height: 80%;
-  overflow-y: auto;
+h2 button svg {
+  height: 1em;
+  margin-left: 0.5em;
 }
 
-
-.close {
-  color: #aaaaaa;
-  font-size: 1.25em;
-  font-weight: bold;
-  text-decoration: none;
-  margin-right: 1em;
-  float:left;
+h2 button:focus svg {
+  outline: 2px dotted;
 }
 
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
-  cursor: pointer;
+[aria-expanded="true"] .vert {
+  display: none;
 }
 
-/* Show the modal when its link is clicked */
-[id$=syllabi]:target { display: block; }
-[id$=materials]:target { display: block; }
-[id$=assessments]:target { display: block; }
+[aria-expanded] rect {
+  fill: currentColor;
+}

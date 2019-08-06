@@ -1,143 +1,73 @@
 ---
 # The dashes above and below this line are required for Jekyll to render the page
 # https://jekyllrb.com/docs/front-matter/
+
+title: Instructor Resources
+description: 'A repository of resources for instructors using <a href="https://coursekata.org"><em>Introduction to Statistics: A Modeling Approach</em></a>'
+layout: default
 ---
 
-<!doctype html>
-<html lang="en">
+<section>
+  <h2>Some quick notes</h2>
+  <p>
+    Clicking the header to each of the categories below will display a list of the files in that category. All resources listed are "cumulative" in that if something is labeled "ch5", that worksheet, slide deck, or assessment may include material from chapters 1 through 5. It is assumed that students will have completed up through chapter 5 before they use this resource.
+  </p>
+  <p>
+    <strong>Important: students can also find the assessments that are posted here.</strong> If you use these assessments, we recommend that you use different data sets or contexts to implement them.
+  </p>
+</section>
 
-<head>
-
-  <meta charset="utf-8">
-  <title>CZI Stats | Instructor Resources</title>
-  <meta name="description" content="Resources for instructors using Introduction to Statistics: A Modeling Approach">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <link href="//fonts.googleapis.com/css?family=Montserrat|Open+Sans&display=swap" rel="stylesheet">
-  <link href="{{ "/assets/css/normalize.css" | relative_url }}"" rel="stylesheet">
-  <link href="{{ "/assets/css/boilerplate.css" | relative_url }}"" rel="stylesheet">
-  <link href="{{ "/assets/css/main.css" | relative_url }}"" rel="stylesheet">
-</head>
-
-<body>
-  <header class="bg-primary bg-full-width">
-    <h1>Instructor Resources</h1>
-    <h3>
-      A repository of resources for instructors using <a href="https://coursekata.org"><em>Introduction to Statistics: A Modeling Approach</em></a>
-    </h3>
-  </header>
-
-  <section>
-    <h2>Some quick notes</h2>
+<section id="resources">
+  <div class="panel">
+    <h2><a href="{{ "syllabi" | relative_url }}">Syllabi</a></h2>
     <p>
-      Clicking the header to each of the categories below will display a list of the files in that category. All resources listed are "cumulative" in that if something is labeled "ch5", that worksheet, slide deck, or assessment may include material from chapters 1 through 5. It is assumed that students will have completed up through chapter 5 before they use this resource.
+      Real syllabi from classes with different enrollment, schedules, etc.
     </p>
+  </div>
+
+  <div class="panel">
+    <h2><a href="{{ "class-materials" | relative_url }}">Class Materials</a></h2>
     <p>
-      <strong>Important: students can also find the assessments that are posted here.</strong> If you use these assessments, we recommend that you use different data sets or contexts to implement them.
+      Slides, in-class activities, homework assignments, etc.
     </p>
-  </section>
+  </div>
 
-  <section class="bg-primary-light bg-full-width" id="resources">
-    <div class="panel">
-      <h2><a href="#syllabi">Syllabi</a></h2>
-      <p>
-        Real syllabi from classes with different enrollment, schedules, etc.
-      </p>
-
-      <div class="modal-container" id="syllabi">
-        <div class="modal-content">
-          <a href="#resources" class="close">&times;</a>
-          <ul>
-            {% for file in site.static_files %}
-              {% if file.path contains "syllabi/" %}
-                <li><a href="{{ file.path | absolute_url }}" target="_blank">{{ file.name }}</a></li>
-              {% endif %}
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel">
-      <h2><a href="#materials">Class Materials</a></h2>
-      <p>
-        Slides, in-class activities, homework assignments, etc.
-      </p>
-
-      <div  class="modal-container" id="materials">
-        <div class="modal-content">
-          <a href="#resources" class="close">&times;</a>
-          <ul>
-            {% for file in site.static_files %}
-              {% if file.path contains "class materials/" %}
-                <li><a href="{{ file.path | absolute_url }}" target="_blank">{{ file.name }}</a></li>
-              {% endif %}
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <div class="panel">
-      <h2><a href="#assessments">Assessments</a></h2>
-      <p>
-        Past quizzes and exams used for the course.
-      </p>
-
-      <div class="modal-container" id="assessments">
-        <div class="modal-content">
-          <a href="#resources" class="close">&times;</a>
-          <ul>
-            {% for file in site.static_files %}
-              {% if file.path contains "assessments/" %}
-                <li><a href="{{ file.path | absolute_url }}" target="_blank">{{ file.name }}</a></li>
-              {% endif %}
-            {% endfor %}
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Where are these resources from?</h2>
+  <div class="panel">
+    <h2><a href="{{ "assessments" | relative_url}}">Assessments</a></h2>
     <p>
-      Several instructors contribute to these sample resources. A little information about who they are and the contexts in which they developed these are provided here. Their last names will be part of the file names.
+      Past quizzes and exams used for the course.
     </p>
+  </div>
+</section>
 
-    <h3>Son</h3>
-    <p>
-      Ji Son is one of the authors of the online textbook and an instructor in Cal State LA's Psychology Department. Her course is an inferential statistics course, each section is ~25 students (Psychology majors), 15 week (semester), lecture and lab section, meets twice a week.
-    </p>
+<section>
+  <h2>Where are these resources from?</h2>
+  <p>
+    Several instructors contribute to these sample resources. A little information about who they are and the contexts in which they developed these are provided here. Their last names will be part of the file names.
+  </p>
 
-    <h3>Stigler</h3>
-    <p>
-      Jim Stigler is one of the authors of the online textbook and an instructor in UCLA's Psychology Department. His course is an inferential statistics course, each section is ~200+ students (Psychology majors), 10 week (quarter), lecture, meets twice a week.
-    </p>
+  <h3>Son</h3>
+  <p>
+    Ji Son is one of the authors of the online textbook and an instructor in Cal State LA's Psychology Department. Her course is an inferential statistics course, each section is ~25 students (Psychology majors), 15 week (semester), lecture and lab section, meets twice a week.
+  </p>
 
-    <h3>Montoya</h3>
-    <p>
-      Amanda Montoya is an expert in statistics and an instructor in UCLA's Psychology Department. Her course is an inferential statistics course, each section is ~200+ students (Psychology majors), 10 week (quarter), lecture, meets twice a week.
-    </p>
+  <h3>Stigler</h3>
+  <p>
+    Jim Stigler is one of the authors of the online textbook and an instructor in UCLA's Psychology Department. His course is an inferential statistics course, each section is ~200+ students (Psychology majors), 10 week (quarter), lecture, meets twice a week.
+  </p>
 
-    <h3>Chen</h3>
-    <p>
-      Miles Chen is an expert in statistics and has been an instructor both at UCLA and UCLA Extension. His course is an introductory statistics course, each section is 10-40 students (different majors), 10 week (quarter), lecture, meets once a week.
-    </p>
+  <h3>Montoya</h3>
+  <p>
+    Amanda Montoya is an expert in statistics and an instructor in UCLA's Psychology Department. Her course is an inferential statistics course, each section is ~200+ students (Psychology majors), 10 week (quarter), lecture, meets twice a week.
+  </p>
 
-    <h2>Contribute!</h2>
-    <p>
-      We would love to include your resources here as well. This will help new instructors get started with their classes, experienced instructors innovate with their classes, and give everyone a feel for how others are teaching the course.
-    </p>
-  </aside>
+  <h3>Chen</h3>
+  <p>
+    Miles Chen is an expert in statistics and has been an instructor both at UCLA and UCLA Extension. His course is an introductory statistics course, each section is 10-40 students (different majors), 10 week (quarter), lecture, meets once a week.
+  </p>
 
-  <footer class="bg-secondary bg-full-width">
-    <p>
-      This repository is a project of the UCLA Psychology Department’s Teaching and Learning Lab. <br>
-      View the source code on GitHub: <a href="{{ site.github.repository_url }}" target="_blank">{{ site.github.repository_nwo }}</a>
-    </p>
-  </footer>
-
-</body>
-
-</html>
+  <h2>Contribute!</h2>
+  <p>
+    We would love to include your resources here as well. This will help new instructors get started with their classes, experienced instructors innovate with their classes, and give everyone a feel for how others are teaching the course.
+  </p>
+</section>
