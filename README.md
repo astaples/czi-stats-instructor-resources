@@ -25,3 +25,12 @@ Amanda Montoya is an expert in statistics and an instructor in UCLA's Psychology
 
 ### Chen
 Miles Chen is an expert in statistics and has been an instructor both at UCLA and UCLA Extension. His course is an introductory statistics course, each section is 10-40 students (different majors), 10 week (quarter), lecture, meets once a week.
+
+## Learning Lab Better Book (LLBB) Instructors
+The following instructors have just joined our project and have begun to teach their courses with this textbook. We often do not have full sets of materials from them but they have begun to provide example syllabi, class materials, etc. as well. We look forward to more of their example materials.
+
+## Stone
+Jeff Stone is an instructor in CalStateLA's Sociology Department. His course is an inferential statistics course, each section is 25 students (Sociology majors), 15 week (semester), lecture and lab section, meets twice a week.
+
+## Viega
+Jacob Viega is an instructor in Pierce's Math Department. His course is an introductory statistics course, 15 week (semester).
