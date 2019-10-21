@@ -1,0 +1,27 @@
+---
+# The dashes above and below this line are required for Jekyll to render the page
+# https://jekyllrb.com/docs/front-matter/
+
+layout: directory
+---
+
+{% assign subfolders = "" | split: "," %}
+{% for file in site.static_files %}
+  {% if file.path contains page.folder %}
+    {% assign parts = file.path | split: "/" %}
+    {% unless subfolders contains parts[2] %}
+      {% assign subfolders = subfolders | push: parts[2] %}
+    {% endunless %}
+  {% endif %}
+{% endfor %}
+
+{% for subfolder in subfolders %}
+<h2 class="collapsible">{{ subfolder }}</h2>
+<ul class="file-list">
+  {% for file in site.static_files %}
+    {% if file.path contains page.folder and file.path contains subfolder %}
+      <li><a href="{{ file.path | absolute_url }}">{{ file.name }}</a></li>
+    {% endif %}
+  {% endfor %}
+</ul>
+{% endfor %}

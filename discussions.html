@@ -1,0 +1,18 @@
+---
+# The dashes above and below this line are required for Jekyll to render the page
+# https://jekyllrb.com/docs/front-matter/
+
+title: Discussions
+description: 'Discussions with instructors using <a href="https://coursekata.org"><em>Introduction to Statistics: A Modeling Approach</em></a>'
+layout: directory
+---
+
+<ul>
+  {% for discussion in site.discussions %}
+    <li class="link-list">
+      <a href="{{ discussion.link }}">{{ discussion.title }}</a> <span class="link-date">({{ discussion.date }})</span>
+      <p class="tags">Participants: {{ discussion.participants | sort | join: "; " }}</p>
+      <p class="tags">Tags: {{ discussion.tags | sort | join: "; " }}</p>
+    </li>
+  {% endfor %}
+</ul>

@@ -1,0 +1,25 @@
+# Add entries below to populate the Discussions links
+# Entries should be valid YAML (see yaml.org/spec)
+# To ensure that the site will load, use yamllint.com to validate the contents of this file
+discussions:
+  - link: https://youtube.com/
+    title: YouTube Homepage
+    date: 2019-10-21
+    participants:
+      - Adam Blake
+      - Karen Givvin
+    tags:
+      - main site
+      - landing page
+      - YouTube
+
+  - link: https://vimeo.com/
+    title: Vimeo Homepage
+    date: 2019-10-20
+    participants:
+      - Karen Givvin
+      - Jim Stigler
+    tags:
+      - main site
+      - landing page
+      - Vimeo

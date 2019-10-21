@@ -56,6 +56,24 @@ a {
   color: #2C3F51;
 }
 
+.tags {
+  color: #888;
+}
+
+.link-list {
+  margin-bottom: 1em;
+}
+
+.link-list p {
+  font-size: .9em;
+  line-height: 1.2rem;
+  margin: 0;
+}
+
+.link-date {
+  font-size: .9em;
+}
+
 /* Layout */
 /*****************************************************************************/
 html, body {
@@ -63,7 +81,7 @@ html, body {
 }
 
 body {
-  max-width: 960px;
+  max-width: 1024px;
   margin: 0 auto;
 }
 
@@ -98,20 +116,6 @@ footer {
   border-bottom: 4px solid #19ACED;
 }
 
-nav ul {
-  display: flex;
-  justify-content: space-between;
-  padding-inline-start: 0;
-  padding: 0 2rem;
-}
-
-li {
-  white-space: nowrap;
-  padding: .1em 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 @media (min-width: 960px) {
   section#resources {
     flex-direction: row;
@@ -143,6 +147,36 @@ li {
     right: calc(51% - 51vw);
   }
 }
+
+/* Navigation */
+/*****************************************************************************/
+
+nav ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-inline-start: 0;
+  padding: .5rem 2rem;
+  margin: 0;
+}
+
+nav ul li {
+  white-space: nowrap;
+  padding: .5em 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 960px) {
+  nav ul {
+    flex-direction: row;
+  }
+
+  nav ul li {
+    padding: .1em 0;
+  }
+}
+
 
 /* Folder Lists */
 /*****************************************************************************/
