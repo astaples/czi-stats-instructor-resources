@@ -10,7 +10,7 @@ layout: directory
 <ul>
   {% for discussion in site.discussions %}
     <li class="link-list">
-      <a href="{{ discussion.link }}">{{ discussion.title }}</a> <span class="link-date">({{ discussion.date }})</span>
+      <a href="{{ discussion.link }}" target="_blank">{{ discussion.title }}</a> <span class="link-date">({{ discussion.date }})</span>
       <p class="tags">Participants: {{ discussion.participants | sort | join: "; " }}</p>
       <p class="tags">Tags: {{ discussion.tags | sort | join: "; " }}</p>
     </li>
